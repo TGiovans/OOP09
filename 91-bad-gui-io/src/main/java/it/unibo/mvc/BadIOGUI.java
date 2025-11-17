@@ -10,16 +10,12 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -78,15 +74,14 @@ public class BadIOGUI {
         });
         read.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent ignored){
-                File f = new File(PATH);
-                Path p = f.toPath();
-                try (InputStream is = new FileInputStream(PATH)) {
-                    List<String> out = Files.readAllLines(p, StandardCharsets.UTF_8);
-                    for(String line : out){
-                        System.out.println(line);
+            public void actionPerformed(final ActionEvent ignored) {
+                final File f = new File(PATH);
+                final Path p = f.toPath();
+                try {
+                    for (final String line : Files.readAllLines(p, StandardCharsets.UTF_8)) {
+                        System.out.println(line); // NOPMD: requested by exc.
                     }
-                }catch (final IOException e) {
+                } catch (final IOException e) {
                     JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace(); // NOPMD: allowed as this is just an exercise
                 }
