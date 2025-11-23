@@ -10,29 +10,31 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import it.unibo.mvc.Controller;
-
 /**
  * A very simple program using a graphical interface.
  * 
  */
 public final class SimpleGUI {
 
-    private final JFrame frame = new JFrame();
     private static final int PROPORTION = 5;
+    private final JFrame frame = new JFrame();
     private final Controller ctrl;
 
-    public SimpleGUI(){
+    /**
+     * Creates a simple GUI to interact with.
+     */
+    public SimpleGUI() {
         ctrl = new Controller();
         final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        JTextArea empty = new JTextArea();
+        final JTextArea empty = new JTextArea();
         mainPanel.add(empty, BorderLayout.CENTER);
-        JButton save = new JButton("Save");
+        final JButton save = new JButton("Save");
         mainPanel.add(save, BorderLayout.SOUTH);
         frame.setContentPane(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         save.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent a) {
                 ctrl.setFile(ctrl.getFile());
             }
@@ -47,8 +49,14 @@ public final class SimpleGUI {
             frame.setLocationByPlatform(true);
             frame.setVisible(true);
         }
-        
-    public static void main(String[] args) {
+
+        /**
+         * Starts the GUI.
+         * 
+         * @param args - whatever is passed in input at launch.
+         */
+        public static void main(final String[] args) {
+        new SimpleGUI().display();
         new SimpleGUIWithFileChooser().display();
     }
 

@@ -1,6 +1,5 @@
 package it.unibo.mvc;
 
-import it.unibo.mvc.Controller;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -14,8 +13,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-
 
 /**
  * A very simple program using a graphical interface.
@@ -23,12 +20,14 @@ import javax.swing.border.Border;
  */
 public final class SimpleGUIWithFileChooser {
 
+    private static final int PROPORTION = 5;
     private final Controller dealer = new Controller();
     private final JFrame frame = new JFrame();
-    private static final int PROPORTION = 5;
-    
 
-    public SimpleGUIWithFileChooser(){
+    /**
+     * Creates a simple GUI with integrated file chooser.
+     */
+    public SimpleGUIWithFileChooser() {
         final JTextField fileChooser = new JTextField();
         final JPanel fileChoicePanel = new JPanel();
         final JButton filePress = new JButton("Browse");
@@ -40,9 +39,10 @@ public final class SimpleGUIWithFileChooser {
         fileChooser.setEditable(false);
         fileChooser.setText(dealer.getPath());
         filePress.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(final ActionEvent a) {
-                JFileChooser browser = new JFileChooser();
-                switch(browser.showSaveDialog(null)) {
+                final JFileChooser browser = new JFileChooser();
+                switch (browser.showSaveDialog(null)) {
                     case JFileChooser.APPROVE_OPTION: dealer.setFile(browser.getSelectedFile()); 
                                                       fileChooser.setText(dealer.getPath());
                                                       break;
@@ -63,8 +63,10 @@ public final class SimpleGUIWithFileChooser {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    
-    protected void display() {
+    /**
+     * Displays the GUI on screen.
+     */
+    void display() {
             final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
             final int sw = (int) screen.getWidth();
             final int sh = (int) screen.getHeight();
