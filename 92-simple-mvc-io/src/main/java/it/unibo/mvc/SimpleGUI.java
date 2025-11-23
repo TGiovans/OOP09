@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * A very simple program using a graphical interface.
@@ -35,8 +36,9 @@ public final class SimpleGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         save.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(final ActionEvent a) {
-                ctrl.setFile(ctrl.getFile());
+            public void actionPerformed(final ActionEvent e) {
+                final File toSave = new File(empty.getText());
+                ctrl.setFile(toSave);
             }
         });
     }

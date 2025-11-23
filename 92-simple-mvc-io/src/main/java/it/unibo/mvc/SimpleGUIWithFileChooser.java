@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -52,6 +55,13 @@ public final class SimpleGUIWithFileChooser {
                                                   "ERROR", 
                                                         JOptionPane.ERROR_MESSAGE); 
                 }
+            }
+        });
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                final File toSave = new File(fileChooser.getText());
+                dealer.setFile(toSave);
             }
         });
         fileChoicePanel.add(fileChooser, BorderLayout.CENTER);
